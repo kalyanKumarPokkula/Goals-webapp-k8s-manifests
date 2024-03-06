@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goalsapp-api-deployment
+  labels:
+    app: goalsapp-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: goalsapp-api
+  template:
+    metadata:
+      labels:
+        app: goalsapp-api
+    spec:
+      containers:
+        - name: goalsapp-api
+          image: kalyankumar21/goalstracker-api:1.0
+          env:
+            - name: DBURL
+              valueFrom:
+                configMapKeyRef:
+                  name: goalapp-api-config
+                  key: DBURL
+          ports:
+            - containerPort: 3000

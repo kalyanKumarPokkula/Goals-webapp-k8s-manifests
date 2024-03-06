@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goalsapp-ui-deployment
+  labels:
+    app: goalsapp-ui
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: goalsapp-ui
+  template:
+    metadata:
+      labels:
+        app: goalsapp-ui
+    spec:
+      containers:
+        - name: goalsapp-ui
+          image: kalyankumar21/goalstracer-ui:1.0
+          ports:
+            - containerPort: 3001
